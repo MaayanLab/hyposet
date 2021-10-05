@@ -8,7 +8,7 @@ const DataSearch = React.lazy(() => import('./components/DataSearch'))
 const ManageSets = React.lazy(() => import('./components/ManageSets'))
 
 export default function App() {
-  const [inputProps, setInputProps] = React.useState({sets: [], set_annotations: []})
+  const [inputProps, setInputProps] = React.useState({ sets: [], set_annotations: [], widths_minmax_ratio: 0.1, rotate_col_annotations: true })
   const [loading, setLoading] = React.useState(false)
   const [outputProps, setOutputProps] = React.useState(null)
   React.useEffect(() => {
