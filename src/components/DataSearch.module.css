@@ -1,0 +1,7 @@
+.DataSearch {
+  flex: 1 1 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+}

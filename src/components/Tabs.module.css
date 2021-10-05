@@ -6,7 +6,7 @@
   justify-items: stretch;
 }
 
-.Tabs > div, .Tabs > div > div {
+.Tabs > div, .Tabs > div {
   flex: 1 1 0px;
   display: flex;
   overflow: hidden;

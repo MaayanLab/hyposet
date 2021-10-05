@@ -11,3 +11,7 @@
   display: flex;
   overflow: hidden;
 }
+
+.AppFigure > div {
+  overflow: auto !important;
+}

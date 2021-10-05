@@ -29,7 +29,7 @@ export default function App() {
   return (
     <React.Suspense fallback={null}>
       <div className={styles.App}>
-        <div>
+        <div className={styles.AppFigure}>
           {outputProps !== null ? (
             <ReactSupervenn {...outputProps} />
           ) : null}

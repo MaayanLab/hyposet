@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styles from './DataSearch.module.css'
 
 const Tabs = React.lazy(() => import('./Tabs'))
 const DataSearchResults = React.lazy(() => import('./DataSearchResults'))
@@ -8,7 +9,7 @@ export default function DataSearch({ props: { setProps } }) {
   const [inputSetName, setInputSetName] = React.useState('')
   const [enrichrList, setEnrichrList] = React.useState(null)
   return (
-    <div>
+    <div className={styles.DataSearch}>
       <div>
         <label for="input-set-name">Input Set Name</label>
         <input
