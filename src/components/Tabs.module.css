@@ -1,0 +1,14 @@
+.Tabs {
+  flex: 1 1 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+}
+
+.Tabs > div, .Tabs > div > div {
+  flex: 1 1 0px;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}

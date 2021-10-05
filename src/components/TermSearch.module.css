@@ -1,0 +1,25 @@
+.TermSearch {
+  flex: 1 1 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+}
+
+.TermSearchBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.TermSearchBox > label {
+  white-space: nowrap;
+}
+
+.TermSearchResults {
+  flex: 1 1 0;
+  overflow: auto;
+}
+.TermSearchResults > ul {
+  list-style: none;
+  margin: 0;
+}

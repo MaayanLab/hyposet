@@ -1,0 +1,16 @@
+.ManageSets {
+  flex: 1 1 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-items: stretch;
+}
+
+.Sets {
+  flex: 1 1 0;
+  overflow: auto;
+}
+.Sets > ul {
+  list-style: none;
+  margin: 0;
+}

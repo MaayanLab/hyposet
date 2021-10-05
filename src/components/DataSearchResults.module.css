@@ -1,0 +1,8 @@
+.DataSearchResults {
+  flex: 1 1 0;
+  overflow: auto;
+}
+.DataSearchResults > ul {
+  list-style: none;
+  margin: 0;
+}

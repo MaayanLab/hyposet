@@ -1,0 +1,32 @@
+{
+  "name": "hyposet",
+  "version": "0.0.1",
+  "description": "An interactive web application for set overlap inspection.",
+  "main": "src/App.jsx",
+  "scripts": {
+    "build": "mkdir -p dist; webpack",
+    "dev": "mkdir -p dist; concurrently --kill-others \"webpack -w\" \"python3 app.py\""
+  },
+  "author": "Daniel J. B. Clarke <danieljbclarkemssm@gmail.com>",
+  "license": "CC BY-NC-SA 4.0",
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.3.0",
+    "css-loader": "^6.3.0",
+    "html-webpack-plugin": "^5.3.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.56.1",
+    "webpack-cli": "^4.8.0"
+  },
+  "dependencies": {
+    "babel-plugin-dynamic-import-webpack": "^1.1.0",
+    "babel-plugin-remove-webpack": "^1.1.0",
+    "bootstrap": "^5.1.1",
+    "react": "^17.0.2",
+    "react-supervenn": "github:maayanlab/react-supervenn"
+  }
+}
