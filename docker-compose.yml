@@ -1,0 +1,7 @@
+version: '3'
+services:
+  app:
+    build: .
+    image: maayanlab/hyposet
+    ports:
+      - 5000:5000
