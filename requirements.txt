@@ -1,0 +1,5 @@
+aiohttp
+click
+jinja2-cli
+react-supervenn @ git+https://github.com/MaayanLab/react-supervenn.git
+supervisor
