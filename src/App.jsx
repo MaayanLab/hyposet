@@ -9,27 +9,40 @@ const ManageSets = React.lazy(() => import('./components/ManageSets'))
 
 export default function App() {
   const [inputProps, setInputProps] = React.useState({sets: [], set_annotations: []})
+  const [loading, setLoading] = React.useState(false)
   const [outputProps, setOutputProps] = React.useState(null)
-  React.useEffect(async () => {
-    if (inputProps.sets.length == 0) {
-      setOutputProps(null)
-    } else {
-      const req = await fetch('/api/supervenn', {
+  React.useEffect(() => {
+    setOutputProps(null)
+    if (inputProps.sets.length > 0) {
+      setLoading(true)
+      const abortController = new AbortController()
+      fetch('/api/supervenn', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
         body: JSON.stringify(inputProps),
+        signal: abortController.signal,
       })
-      const res = await req.json()
-      setOutputProps(res)
+        .then(req => req.json())
+        .then(res => {
+          setOutputProps(res)
+          setLoading(false)
+        })
+        .catch(err => {
+          console.warn(err)
+        })
+      return () => {
+        abortController.abort()
+      }
     }
   }, [inputProps])
   return (
     <React.Suspense fallback={null}>
       <div className={styles.App}>
         <div className={styles.AppFigure}>
+          {loading ? <span>Loading...</span> : null}
           {outputProps !== null ? (
             <ReactSupervenn {...outputProps} />
           ) : null}
