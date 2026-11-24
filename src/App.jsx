@@ -1,7 +1,7 @@
 import * as React from "react"
 import styles from './App.module.css'
 
-const ReactSupervenn = React.lazy(() => import('react-supervenn/src/components/ReactSupervenn'))
+const ReactSupervenn = React.lazy(() => import('react-supervenn'))
 const Tabs = React.lazy(() => import('./components/Tabs'))
 const TermSearch = React.lazy(() => import('./components/TermSearch'))
 const DataSearch = React.lazy(() => import('./components/DataSearch'))

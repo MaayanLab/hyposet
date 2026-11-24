@@ -45,7 +45,6 @@ module.exports = function (_env, _argv) {
               ],
               plugins: [
                 '@babel/plugin-transform-runtime',
-                'dynamic-import-webpack'
               ],
             }
           }
@@ -68,7 +67,6 @@ module.exports = function (_env, _argv) {
               ],
               plugins: [
                 '@babel/plugin-transform-runtime',
-                'dynamic-import-webpack'
               ],
             }
           }
@@ -77,7 +75,16 @@ module.exports = function (_env, _argv) {
           test: /\.css$/,
           use: [
             'style-loader',
-            'css-loader'
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  auto: true,
+                  namedExport: false,
+                  exportLocalsConvention: 'as-is',
+                },
+              },
+            },
           ]
         },
         {

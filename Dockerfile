@@ -1,24 +1,37 @@
-FROM node
-
-ARG DEBIAN_FRONTEND="noninteractive"
-
-ADD deps.txt /deps.txt
-RUN set -x \
-  && echo "Installing system dependencies from deps.txt..." \
-  && apt-get -y update \
-  && apt-get -y install $(grep -v '^#' /deps.txt) \
-  && rm -rf /var/lib/apt/lists/* \
-  && rm /deps.txt
-
-ADD requirements.txt /requirements.txt
-RUN set -x \
-  && echo "Installing python dependencies from requirements.txt..." \
-  && pip3 install --no-cache-dir -r requirements.txt \
-  && rm /requirements.txt
-
-ADD . /app
+# --- build the frontend ---
+FROM node:24-slim AS frontend
 WORKDIR /app
-RUN npm i && npm run build && rm -r node_modules
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY webpack.config.js ./
+COPY src ./src
+RUN npm run build
 
+# --- build the python environment ---
+FROM python:3.14-alpine AS backend
+RUN apk add --no-cache git
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+  && pip install --no-cache-dir -r /requirements.txt \
+  && pip uninstall -y pip
+
+# --- runtime ---
+FROM python:3.14-alpine
+COPY deps.txt /deps.txt
+# musl & sqlite-libs are pulled from edge for CVE fixes not yet backported to the
+#  stable alpine branch (CVE-2026-107891, CVE-2026-119586); drop once they are.
+RUN apk upgrade --no-cache \
+  && apk upgrade --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main musl musl-utils sqlite-libs \
+  && apk add --no-cache $(grep -v '^#' /deps.txt) \
+  && rm /deps.txt \
+  && python3 -m pip uninstall -y pip
+COPY --from=backend /venv /venv
+ENV PATH="/venv/bin:$PATH"
+WORKDIR /app
+COPY app.py ./
+COPY production ./production
+COPY --from=frontend /app/dist ./dist
 RUN chmod +x /app/production/entrypoint.sh
 CMD ["/app/production/entrypoint.sh", "supervisord", "-n", "-c", "/app/production/supervisor.conf"]

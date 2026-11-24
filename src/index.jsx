@@ -1,11 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import * as React from "react"
-import * as ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 
 const App = React.lazy(() => import('./App'))
 
-ReactDOM.render(
+createRoot(document.getElementById('root')).render(
   <React.Suspense fallback={null}><App /></React.Suspense>,
-  document.getElementById('root'),
 )
